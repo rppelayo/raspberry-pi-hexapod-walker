@@ -1,0 +1,71 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<title>RaspberryPi Hexapod</title>
+<script type="text/javascript">
+function button(value) {
+  if(value=='manual'){
+	document.getElementById('forward').disabled=false;
+	document.getElementById('back').disabled=false;
+	document.getElementById('left').disabled=false;
+	document.getElementById('right').disabled=false;
+	document.getElementById('stop').disabled=false;
+  }else if(value=='auto'){
+ 	document.getElementById('forward').disabled=true;
+        document.getElementById('back').disabled=true;
+        document.getElementById('left').disabled=true;
+        document.getElementById('right').disabled=true;
+        document.getElementById('stop').disabled=true;
+ }
+  var request = false;
+  if(window.XMLHttpRequest){
+    request = new XMLHttpRequest();
+  }else if(window.ActiveXObject){
+    try {
+      request = new ActiveXObject("Msxml2.XMLHTTP");
+    } catch(e) {
+      request = new ActiveXObject("Msxml.XMLHTTP");
+    }
+  }
+  //XMLHttpRequest failed
+  if(!request){
+    alert("XMLHttpRequest failed...");
+    return false;
+  }
+  //query
+  var send = 'code=' + value;
+  request.open('POST','/hexapod/hexapod.php',true);
+  //HTML header
+  request.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+  request.send(send);
+}
+</script>
+<style>
+.button {
+ height:100px;
+}
+</style>
+</head>
+<body>
+<br>
+<br>
+&nbsp;
+<!-- Rounded switch -->
+<center>
+
+<input class="button" type="button" value="Auto" onClick="button('auto')">
+<input class="button" type="button" value="Manual" onClick="button('manual')">
+
+<br>
+<br>
+<br>
+
+<input id='right' class="button" disabled="true" type="button" value="go right" onClick="button('right')">
+<input id='forward' class="button" disabled="true" type="button" value="forward" onClick="button('front');">
+<input id='back' class="button" disabled="true" type="button" value="backward" onClick="button('back');">
+<input id='left' class="button" disabled="true" type="button" value="go left" onClick="button('left');">
+<input id='stop' class="button" disabled="true" type="button" value="stop" onClick="button('stop');">
+</center>
+
+</body>
+</html>
