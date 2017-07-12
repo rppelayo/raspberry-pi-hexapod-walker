@@ -6,13 +6,13 @@
 function button(value) {
   if(value=='manual'){
 	document.getElementById('forward').disabled=false;
-	document.getElementById('back').disabled=false;
+	document.getElementById('backward').disabled=false;
 	document.getElementById('left').disabled=false;
 	document.getElementById('right').disabled=false;
 	document.getElementById('stop').disabled=false;
   }else if(value=='auto'){
  	document.getElementById('forward').disabled=true;
-        document.getElementById('back').disabled=true;
+        document.getElementById('backward').disabled=true;
         document.getElementById('left').disabled=true;
         document.getElementById('right').disabled=true;
         document.getElementById('stop').disabled=true;
@@ -42,29 +42,83 @@ function button(value) {
 </script>
 <style>
 .button {
- height:100px;
+ 	height:100px;
+	width: 80px;
+	border: 0;
 }
+#left{
+	background: url(assets/Go%20Right.png) no-repeat;
+	position: relative;
+	left: -150px;
+	top: 80px;
+}
+#left:hover{
+	background: url(assets/GO%20right_action.png) no-repeat;
+}
+#right{
+	background: url(assets/GO-left.png) no-repeat;
+	position: relative;
+	left: 250px;
+	top: 80px;
+}
+#right:hover{
+	background: url(assets/GO%20left%20Action.png) no-repeat;
+}
+#forward{
+	background: url(assets/Forward.png) no-repeat;
+	position: relative;
+	left: 91px;
+	top: 6px;
+}
+#forward:hover{
+	background: url(assets/Forward_Action.png) no-repeat;
+}
+#backward{
+	background: url(assets/Backward.png) no-repeat;
+	position: relative;
+	left: 8px;
+	top: 155px;
+}
+#backward:hover{
+	background: url(assets/Backward_action.png) no-repeat;
+}
+#stop{
+	background: url(assets/STOP.png) no-repeat;
+	position: relative;
+	left: -160px;
+	top: 80px;
+}
+#auto{
+	background-color: 34495e;
+	color: #ffffff;	
+}
+#manual{
+	background-color: 3598db;
+	color: #ffffff;
+}
+
 </style>
 </head>
 <body>
-<br>
-<br>
-&nbsp;
-<!-- Rounded switch -->
 <center>
+<br>
+<br>
+<img src="assets/Logo.png"></img>
+<br>
+<br>
 
-<input class="button" type="button" value="Auto" onClick="button('auto')">
-<input class="button" type="button" value="Manual" onClick="button('manual')">
+<input id="auto" class="button" type="button" value="Auto" onClick="button('auto')">
+<input id="manual" class="button" type="button" value="Manual" onClick="button('manual')">
 
 <br>
 <br>
 <br>
 
-<input id='right' class="button" disabled="true" type="button" value="go right" onClick="button('right')">
-<input id='forward' class="button" disabled="true" type="button" value="forward" onClick="button('front');">
-<input id='back' class="button" disabled="true" type="button" value="backward" onClick="button('back');">
-<input id='left' class="button" disabled="true" type="button" value="go left" onClick="button('left');">
-<input id='stop' class="button" disabled="true" type="button" value="stop" onClick="button('stop');">
+<input id="right" class="button" disabled="true" type="button" value="" onClick="button('right')">
+<input id="forward" class="button" disabled="true" type="button" value="" onClick="button('front');">
+<input id="backward" class="button" disabled="true" type="button" value="" onClick="button('back');">
+<input id="left" class="button" disabled="true" type="button" value="" onClick="button('left');">
+<input id="stop" class="button" disabled="true" type="button" value="" onClick="button('stop');">
 </center>
 
 </body>
