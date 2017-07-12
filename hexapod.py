@@ -1,3 +1,6 @@
+#Hexapod.py
+#Code for Hexapod Walker by R. Pelayo
+
 #!/usr/bin/python
 
 import RPi.GPIO as GPIO
@@ -9,6 +12,7 @@ import signal
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 
+#pin definitions
 tilt = 4
 br = 21
 bl = 6
@@ -16,12 +20,14 @@ trig = 23
 echo = 24
 head = 26
 
+#setup pins for ultrasonic sensor
 GPIO.setup(trig, GPIO.OUT)
 GPIO.setup(echo, GPIO.IN)
 
+#initialize pi object
 pi = pigpio.pi()
 
-
+#move backward
 def backward():
 	pi.set_servo_pulsewidth(tilt, 800) 
 	time.sleep(0.15)
@@ -38,7 +44,7 @@ def backward():
 	pi.set_servo_pulsewidth(br, 1500)   
 	time.sleep(0.15)
 	return;
-
+#move forward
 def forward():
 	pi.set_servo_pulsewidth(tilt, 800) 
 	time.sleep(0.15)
@@ -55,7 +61,7 @@ def forward():
 	pi.set_servo_pulsewidth(br, 1500)   
 	time.sleep(0.15)
 	return;
-
+#move left
 def left():
 	pi.set_servo_pulsewidth(tilt, 800) 
 	time.sleep(0.15)
@@ -72,7 +78,7 @@ def left():
 	pi.set_servo_pulsewidth(br, 1500)   
 	time.sleep(0.15)
 	return;
-
+#move right
 def right():
 	pi.set_servo_pulsewidth(tilt, 800) 
 	time.sleep(0.15)
@@ -89,7 +95,7 @@ def right():
 	pi.set_servo_pulsewidth(br, 1500)   
 	time.sleep(0.15)
 	return;
-	
+#stop	
 def stop():
 	pi.set_servo_pulsewidth(tilt, 0) 
 	time.sleep(0.15)
@@ -99,7 +105,7 @@ def stop():
 	time.sleep(0.15)
 	
 	return
-
+#action when obstacle is detected
 def obstacleDetected():
 	backward()
 	backward()
@@ -111,7 +117,7 @@ def obstacleDetected():
 	right()
 	
 	return
-
+#action to turn head for scanning obstacles
 def turnHead():
 	pi.set_servo_pulsewidth(head, 700)
 	time.sleep(0.5)
@@ -121,7 +127,7 @@ def turnHead():
 	time.sleep(0.5)
 
 	return 
-
+#autonomous mode
 def autoMode():
 	print ("Running in auto mode!")
 
@@ -157,7 +163,7 @@ def autoMode():
 	pi.set_servo_pulsewidth(head, 2100)
 	time.sleep(0.5)
 	return
-	
+#manual mode	
 def manualMode():
 	
         move = str(sys.argv[2])
@@ -178,7 +184,7 @@ def manualMode():
 		print("Invalid argument!")
 	
 	return
-	
+#main routine	
 def main():
 	opt = str(sys.argv[1])
 	
