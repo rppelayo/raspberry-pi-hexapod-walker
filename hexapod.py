@@ -7,6 +7,7 @@ import sys
 import os
 import signal
 GPIO.setmode(GPIO.BCM)
+GPIO.setwarnings(False)
 
 tilt = 4
 br = 21
@@ -103,22 +104,54 @@ def obstacleDetected():
 	backward()
 	backward()
 	backward()
+	backward()
+	backward()
 	right()
 	right()
 	right()
 	
 	return
 
+def turnHead():
+	pi.set_servo_pulsewidth(head, 700)
+	time.sleep(0.5)
+	pi.set_servo_pulsewidth(head, 2100)
+	time.sleep(0.5)
+	pi.set_servo_pulsewidth(head, 1500)
+	time.sleep(0.5)
+
+	return 
+
 def autoMode():
 	print ("Running in auto mode!")
 
-	pi.set_servo_pulsewidth(head, 700)
-	time.sleep(0.5)
-	GPIO.output(trig, True)
+	turnHead()
 	
-	if GPIO.input(echo) == 1:
+	time.sleep(0.5)
+	GPIO.output(trig, 0)
+	time.sleep(0.5)
+	
+	GPIO.output(trig,1)
+	time.sleep(0.00001)
+	GPIO.output(trig,0)
+	
+	while GPIO.input(echo) == 0:
+		pulse_start = time.time()
+	
+	while GPIO.input(echo) == 1:
+		pulse_end = time.time()
+
+	pulse_duration = pulse_end - pulse_start
+	
+	distance = pulse_duration * 17150
+	
+	distance = round(distance, 2)
+	
+	if distance > 1 and distance < 35:
 		obstacleDetected()
 	else:
+		forward()
+		forward()
 		forward()
 	
 	pi.set_servo_pulsewidth(head, 2100)
