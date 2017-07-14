@@ -1,8 +1,6 @@
 # Hexapod Walker using Raspberry Pi
 ### as found in [DIY Hacking](http://diy-hacking.com)
 
-# Three-servo Model
-
 ### Prerequisites:
   1. Python 2.7 or later
   2. Apache Server
