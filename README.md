@@ -1,12 +1,9 @@
 # Hexapod Walker using Raspberry Pi
-### as found in [DIY Hacking](http://diy-hacking.com)
 
 ### Prerequisites:
   1. Python 2.7 or later
   2. Apache Server
   3. pigpiod library for servo control
-
-Full Instructions on How to Build: [Hexapod Walker with Raspberry Pi](http://diy-hacking.com/hexapod-walker-raspberry-pi/)
 
 Instructions:
   1. Browse to your Pi's IP address.
